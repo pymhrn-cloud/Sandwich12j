@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandwich XII-J Kel-10 | Final Template Paling Simpel</title>
+    <style>
+        /* CSS (Gaya Tampilan) */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #f8f8f8;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        header {
+            background-color: #ff6f91;
+            color: white;
+            padding: 20px 0;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .anggota-list {
+            margin-bottom: 25px;
+            font-size: 1em;
+            color: #555;
+            text-align: center;
+        }
+        .anggota-list ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 5px;
+        }
+        .anggota-list li {
+            margin-bottom: 2px;
+        }
+        .tagline {
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 1.1em;
+            color: #fff3e0;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .product-card {
+            background-color: #fff3e0;
+            border-radius: 10px;
+            padding: 15px;
+            width: 30%;
+            min-width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .price-display {
+            font-size: 1.3em;
+            color: #ff6f91;
+            font-weight: bold;
+            margin: 5px 0 10px 0;
+        }
+        .btn-add-to-cart-single {
+            background-color: #FFC107;
+            color: #333;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            width: 100%;
+            font-weight: bold;
+            display: block;
+            box-sizing: border-box;
+        }
+        .order-summary, .contact-info {
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .order-summary h2, .contact-info h2 {
+            color: #ff6f91;
+            margin-bottom: 20px;
+        }
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            border-top: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        #cart-items li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        /* Tombol Checkout dan Pembayaran */
+        .btn-checkout {
+            background-color: #ff6f91;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 10px;
+            width: 100%;
+            font-weight: bold;
+        }
+        .btn-wa, .btn-qris, .btn-cod, .btn-direct {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+            /* Menyembunyikan tombol pembayaran sampai KONFIRMASI diklik */
+            display: none; 
+        }
+        .btn-wa {
+            background-color: #25d366;
+        }
+        .btn-qris {
+            background-color: #007bff;
+        }
+        .btn-cod {
+            background-color: #4CAF50;
+        }
+        .btn-direct {
+            background-color: #ff9800;
+        }
+
+        .form-user-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .form-user-details label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .form-user-details input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ff6f91;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+        /* Menampilkan tombol pembayaran setelah konfirmasi */
+        .show-payment .btn-wa,
+        .show-payment .btn-qris,
+        .show-payment .btn-cod,
+        .show-payment .payment-instruction { /* Tampilkan juga instruksi */
+            display: block;
+        }
+        .show-payment #payment-options-title {
+             display: block !important;
+        }
+        #payment-options-title {
+            text-align: center; 
+            margin-top: 25px; 
+            font-weight: bold;
+            display: none; /* Sembunyikan judul opsi pembayaran di awal */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Sandwich XII-J Kel-10 🥳</h1>
+            <p class="tagline">Manis, Lembut, dan Bikin Nagih! Dijamin <strong>RUGI</strong> Kalau Gak Coba!</p>
+        </header>
+
+        <div class="anggota-list">
+            <strong>Anggota Kelompok:</strong>
+            <ul>
+                <li>1. Bintang Arya</li>
+                <li>2. Salma Rafillah</li>
+                <li>3. Silviana Maharani</li>
+            </ul>
+        </div>
+
+        <section>
+            <h2>✨ Kenapa Sandwich Kami <strong>Wajib</strong> Kamu Coba?</h2>
+            <p>Sumpah, ini sih <strong>sandwich buah paling epic</strong> yang bakal bikin hari-hari kamu di sekolah makin ceria! Lembutnya roti, manisnya pas, dan potongan buah segarnya itu loh... beh, nagih banget!</p>
+            <p>Cocok banget buat temen <strong>istirahat sekolah</strong>, <strong>ngemil bareng bestie</strong>, atau <strong>dibawa pulang</strong> buat dinikmati di rumah. Gak ada alesan buat gak cobain!</p>
+        </section>
+
+        <section class="product-list">
+            <div class="product-card">
+                <h3>🍓 Sandwich Strawberry</h3>
+                <p class="price-display">Hanya <strong>Rp8.000</strong>!</p>
+                <img src="https://www.californiastrawberries.com/wp-content/uploads/2021/08/Japanese-Strawberry-Sandwich-photo.png" alt="Sandwich Strawberry">
+                <p>Buat kamu si paling suka manis, varian ini <strong>wajib</strong> banget dicoba! Krim lembutnya berpadu sempurna sama segarnya irisan strawberry. Rasanya kayak lagi liburan di kebun strawberry!</p>
+                <button type="button" class="btn-add-to-cart-single" 
+                        data-name="Strawberry" data-price="8000" onclick="addToCart(this)">
+                    ➕ Tambahkan ke Keranjang
+                </button>
+            </div>
+
+            <div class="product-card">
+                <h3>🥭 Sandwich Mangga</h3>
+                <p class="price-display">Hanya <strong>Rp8.000</strong>!</p>
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98q-lmmvg3rk2qlg34" alt="Sandwich Mangga">
+                <p>Varian mangga ini <strong>juaranya</strong>! Manisnya mangga yang legit bikin nagih, ditambah sensasi dingin dari krimnya. Rasanya tuh kayak makan es krim mangga, tapi versi sandwich!</p>
+                <button type="button" class="btn-add-to-cart-single" 
+                        data-name="Mangga" data-price="8000" onclick="addToCart(this)">
+                    ➕ Tambahkan ke Keranjang
+                </button>
+            </div>
+
+            <div class="product-card">
+                <h3>🍇 Sandwich Anggur</h3>
+                <p class="price-display">Hanya <strong>Rp8.000</strong>!</p>
+                <img src="https://img-global.cpcdn.com/recipes/d3583e784e8529d5/1200x630cq90/photo.jpg" alt="Sandwich Anggur">
+                <p>Anggur yang <em>juicy</em> dan manis bikin sandwich ini <strong>seger banget</strong>! Pas banget buat ngemil di siang hari, rasanya ringan tapi bikin ketagihan. Auto jadi <em>mood booster</em>!</p>
+                <button type="button" class="btn-add-to-cart-single" 
+                        data-name="Anggur" data-price="8000" onclick="addToCart(this)">
+                    ➕ Tambahkan ke Keranjang
+                </button>
+            </div>
+        </section>
+
+        ---
+
+        <section class="order-summary" id="checkout-area">
+            <h2>🛒 Checkout & Pembayaran</h2>
+            <p>Setelah selesai memilih, isi detail pesanan kamu di bawah ini:</p>
+
+            <div class="form-user-details">
+                <label for="nama_checkout">Nama Lengkap:</label>
+                <input type="text" id="nama_checkout" name="nama" placeholder="Nama kamu" required>
+
+                <label for="kelas_checkout">Kelas (Contoh: XII-J):</label>
+                <input type="text" id="kelas_checkout" name="kelas" placeholder="Kelas kamu" required>
+            </div>
+
+            <div style="background-color: #fff; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                <strong>Ringkasan Keranjangmu:</strong>
+                <ul id="cart-items">
+                    <li style="text-align: center; color: #999;">Keranjang masih kosong.</li>
+                </ul>
+                <p style="font-weight: bold; font-size: 1.2em;">Total Akhir: <span id="cart-total">Rp0</span></p>
+            </div>
+            
+            <button type="button" class="btn-checkout" onclick="confirmOrder()">
+                ✅ KONFIRMASI PESANAN
+            </button>
+            
+            <p id="payment-options-title" style="display: none;">--- PILIH METODE PEMBAYARAN ---</p>
+            
+            <p class="payment-instruction">1. **QRIS / Transfer Digital (DANA/GoPay):** Transfer ke **085719599979**.</p>
+            <a href="#" class="btn-qris" id="qris-link" onclick="sendWAQris()">
+                Konfirmasi Pembayaran Transfer & Kirim Bukti (via WA)
+            </a>
+            
+            <p class="payment-instruction">2. **Bayar Langsung di Sekolah (COD):** Pesanan akan diantar ke kelas.</p>
+            <a href="#" class="btn-cod" id="cod-link" onclick="sendWACod()">
+                💰 Konfirmasi Order COD (via WA)
+            </a>
+
+            <p class="payment-instruction" id="wa-instruction">3. **Chat Tanya-tanya & Konfirmasi Umum:**</p>
+            <a href="#" id="wa-order-link" target="_blank" class="btn-wa">
+                💬 Chat WhatsApp (082299252334)
+            </a>
+        </section>
+
+        ---
+
+        <section class="contact-info">
+            <h2>📍 Mau Coba Langsung? BISA!</h2>
+            <p style="text-align: center;">Yuk, dateng aja ke <strong>SMAN 1 Dramaga</strong> dan cari kami saat jam istirahat. Langsung ambil, langsung bayar!</p>
+            <a href="#" class="btn-direct">Cari Kami di SMAN 1 Dramaga</a>
+        </section>
+
+        <footer>
+            <p style="font-size: 1.2em;"><strong>Beli sekarang sebelum kehabisan!</strong> Rasa seenak ini ludesnya cepet banget, lho!</p>
+        </footer>
+    </div>
+
+
+    <script>
+        // JAVASCRIPT (Logika Keranjang Belanja dan Checkout)
+        
+        let cart = []; 
+        const WA_NUMBER = '6282299252334'; 
+
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        };
+
+        // --- FUNGSI KERANJANG ---
+        function addToCart(buttonElement) {
+            const name = buttonElement.getAttribute('data-name');
+            const price = parseInt(buttonElement.getAttribute('data-price'));
+
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            renderCart(); 
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            let total = 0;
+            
+            cartItemsContainer.innerHTML = ''; 
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<li style="text-align: center; color: #999;">Keranjang masih kosong.</li>';
+            } else {
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <span>${item.quantity}x ${item.name}</span>
+                        <span>
+                            ${formatRupiah(itemTotal)}
+                            <button class="remove-btn" onclick="removeFromCart(${index})">Hapus</button>
+                        </span>
+                    `;
+                    cartItemsContainer.appendChild(listItem);
+                });
+            }
+
+            cartTotalElement.textContent = formatRupiah(total);
+            return total;
+        }
+        
+        // --- FUNGSI CHECKOUT & PEMBAYARAN ---
+
+        // Fungsi utilitas untuk membuat pesan WhatsApp PALING SEDERHANA
+        function getOrderDetails(total, method) {
+            const nama = document.getElementById('nama_checkout').value.trim() || 'Pembeli Rahasia';
+            const kelas = document.getElementById('kelas_checkout').value.trim() || 'Tanpa Kelas';
+            
+            let message = `Hai Kak, tolong konfirmasi pesanan saya ya!`;
+            
+            // Tambahkan detail nama dan kelas di baris kedua
+            message += `%0A%0A`; // Dua baris baru
+            message += `Pembeli: ${nama} (${kelas})`;
+
+            // Tambahkan detail metode bayar dan total (khusus untuk COD dan QRIS)
+            if (method !== 'Tanya Jawab Umum') {
+                message += `%0A`; 
+                message += `Metode Bayar: ${method}. Total: ${formatRupiah(total)}`;
+
+                if (method.includes('QRIS/Transfer')) {
+                    message += `%0A%0A`; 
+                    message += `*Mohon Lampirkan Bukti Transfer (Screenshot) di chat ini.*`;
+                }
+            }
+
+            // Encode kembali teks agar bisa menjadi bagian dari URL
+            // Catatan: Tanda '*' akan membuat teks tebal di WA, ini yang paling minim saya pakai.
+            return encodeURIComponent(message);
+        }
+
+        // 1. Tombol KONFIRMASI PESANAN diklik
+        function confirmOrder() {
+            const total = renderCart();
+            const nama = document.getElementById('nama_checkout').value.trim();
+            const kelas = document.getElementById('kelas_checkout').value.trim();
+
+            if (nama === '' || kelas === '') {
+                alert('Nama Lengkap dan Kelas wajib diisi sebelum konfirmasi!');
+                return;
+            }
+            if (cart.length === 0) {
+                alert('Keranjang belanja masih kosong. Silakan tambahkan produk terlebih dahulu.');
+                return;
+            }
+            
+            // Tampilkan opsi pembayaran
+            document.getElementById('checkout-area').classList.add('show-payment');
+            
+            // Perbarui link WA CHAT (Opsi 3)
+            const waOrderLink = document.getElementById('wa-order-link');
+            waOrderLink.href = `https://wa.me/${WA_NUMBER}?text=${getOrderDetails(total, 'Tanya Jawab Umum')}`;
+
+            alert('Data pesanan telah dikonfirmasi. Silakan pilih salah satu metode pembayaran di bawah ini!');
+        }
+        
+        // 2. Tombol QRIS diklik (Opsi 1)
+        function sendWAQris() {
+             const total = renderCart();
+             if (document.getElementById('nama_checkout').value.trim() === '' || cart.length === 0) {
+                alert('Silakan isi Nama dan Kelas serta tambahkan produk ke keranjang terlebih dahulu!');
+                return;
+            }
+            
+            // Pesan QRIS kini mencakup Total dan Metode Bayar
+            const waMessage = getOrderDetails(total, 'QRIS/Transfer');
+            
+            // Buka WhatsApp untuk kirim bukti/konfirmasi
+            window.open(`https://wa.me/${WA_NUMBER}?text=${waMessage}`, '_blank');
+        }
+
+        // 3. Tombol COD diklik (Opsi 2)
+        function sendWACod() {
+            const total = renderCart();
+            if (document.getElementById('nama_checkout').value.trim() === '' || cart.length === 0) {
+                alert('Silakan isi Nama dan Kelas serta tambahkan produk ke keranjang terlebih dahulu!');
+                return;
+            }
+            
+            // Pesan COD kini mencakup Total dan Metode Bayar
+            const waMessage = getOrderDetails(total, 'COD');
+            
+            // Buka WhatsApp dengan detail COD
+            window.open(`https://wa.me/${WA_NUMBER}?text=${waMessage}`, '_blank');
+        }
+
+        // Jalankan render cart saat pertama kali load
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+
+</body>
+</html>
